@@ -2,9 +2,7 @@ package ma.dentalsoft.ui.views;
 
 import ma.dentalsoft.domain.Consultation;
 import ma.dentalsoft.domain.Intervention;
-import ma.dentalsoft.security.SessionManager;
-import ma.dentalsoft.service.api.ConsultationService;
-import ma.dentalsoft.service.impl.ConsultationServiceImpl;
+import ma.dentalsoft.service.ConsultationService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,11 +19,10 @@ public class ConsultationPanel extends JPanel {
     private JTextArea txtRecapitulatif;
 
     public ConsultationPanel() {
-        this.service = new ConsultationServiceImpl();
+        this.service = new ConsultationService();
         setLayout(new BorderLayout());
 
         // 1. Initialisation d'une consultation de test
-        SessionManager.login("docteur", "MEDECIN");
         consultationCourante = service.demarrerConsultation(10L, 1L);
 
         // 2. Formulaire d'ajout d'intervention

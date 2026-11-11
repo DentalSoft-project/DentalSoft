@@ -17,7 +17,7 @@ public class SessionManager {
 
     // Méthode utilisée par les services pour vérifier les droits (RG-12)
     public static boolean hasAccess(String requiredRole) {
-        if (currentUserRole == null || requiredRole == null) return false;
+        if (currentUserRole == null) return false;
         // Le médecin hérite des droits de la secrétaire (RG-02)
         if (requiredRole.equals("SECRETAIRE") && currentUserRole.equals("MEDECIN")) {
             return true;
