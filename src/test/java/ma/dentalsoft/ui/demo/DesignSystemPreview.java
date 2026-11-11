@@ -15,6 +15,9 @@ import ma.dentalsoft.ui.components.tables.TableStyler;
 import javax.swing.table.DefaultTableModel;
 import ma.dentalsoft.ui.components.badges.BadgeStyles;
 import ma.dentalsoft.ui.components.badges.StatusBadge;
+import ma.dentalsoft.shared.formatting.DisplayFormats;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -40,6 +43,23 @@ public final class DesignSystemPreview {
             UiTheme.install();
             createWindow();
         });
+
+        System.out.println(
+                DisplayFormats.formatDate(
+                        LocalDate.of(2026, 11, 11)
+                )
+        );
+
+        System.out.println(
+                DisplayFormats.formatAmount(
+                        new BigDecimal("1250.00")
+                )
+        );
+
+        System.out.println(
+                DisplayFormats.formatPhone("0612345678")
+        );
+
     }
 
     private static void createWindow() {
