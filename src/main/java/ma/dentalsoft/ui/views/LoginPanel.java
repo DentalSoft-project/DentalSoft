@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,8 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import ma.dentalsoft.domain.Utilisateur;
-import ma.dentalsoft.shared.AuthenticationException;
+import ma.dentalsoft.shared.AuthentificationException;
 import ma.dentalsoft.ui.controllers.LoginController;
+import ma.dentalsoft.ui.views.EtatEcran;
 
 /** Écran de connexion (fonctionnalité transversale d'authentification). */
 public class LoginPanel extends JPanel {
@@ -93,7 +94,7 @@ public class LoginPanel extends JPanel {
                     apresConnexion.run();
                 } catch (ExecutionException e) {
                     var cause = e.getCause();
-                    if (cause instanceof AuthenticationException) {
+                    if (cause instanceof AuthentificationException) {
                         setEtat(EtatEcran.ERREUR, cause.getMessage());
                     } else {
                         setEtat(EtatEcran.ERREUR, "Erreur technique : base de données indisponible ?");

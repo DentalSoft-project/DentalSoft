@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 /** Les 5 états d'un écran demandés par le dossier de spécification. */
 public enum EtatEcran {

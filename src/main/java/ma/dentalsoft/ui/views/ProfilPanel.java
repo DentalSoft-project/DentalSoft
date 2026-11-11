@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -75,5 +75,4 @@ public class ProfilPanel extends JPanel {
         infos.add(new JLabel(valeur), c);
     }
 }
-class ProfilPanel {
-}
+

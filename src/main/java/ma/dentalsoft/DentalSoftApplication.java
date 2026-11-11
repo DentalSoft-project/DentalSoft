@@ -7,7 +7,8 @@ import ma.dentalsoft.config.ApplicationContext;
 import ma.dentalsoft.service.api.AuthService;
 import ma.dentalsoft.session.SessionManager;
 import ma.dentalsoft.ui.controllers.LoginController;
-import ma.dentalsoft.ui.view.AppFrame;
+import ma.dentalsoft.ui.views.AppFrame;
+
 
 public class DentalSoftApplication {
 

@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -19,7 +19,7 @@ public class AppFrame extends JFrame {
     }
 
     private void afficherConnexion() {
-        afficher(new LoginPanel(controller, this::afficherPrincipal));
+        afficher(new ma.dentalsoft.ui.views.LoginPanel(controller, this::afficherPrincipal));
     }
 
     private void afficherPrincipal() {

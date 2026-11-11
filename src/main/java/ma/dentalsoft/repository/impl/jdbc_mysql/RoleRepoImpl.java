@@ -1,4 +1,4 @@
-package ma.dentalsoft.repository.mySql;
+package ma.dentalsoft.repository.impl.jdbc_mysql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
