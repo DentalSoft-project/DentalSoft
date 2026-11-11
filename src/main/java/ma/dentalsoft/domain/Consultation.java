@@ -27,6 +27,7 @@ public class Consultation {
     public Long getMedecinId() { return medecinId; }
     public Long getRdvId() { return rdvId; }
     public LocalDateTime getDateConsultation() { return dateConsultation; }
+    public void setDateConsultation(LocalDateTime dateConsultation) { this.dateConsultation = dateConsultation; }
     public String getObservation() { return observation; }
     public void setObservation(String observation) { this.observation = observation; }
     public String getStatut() { return statut; }
