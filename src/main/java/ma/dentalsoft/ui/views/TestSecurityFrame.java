@@ -1,4 +1,4 @@
-package ma.dentalsoft.ui.view;
+package ma.dentalsoft.ui.views;
 
 import ma.dentalsoft.security.SessionManager;
 import ma.dentalsoft.dto.DossierMedicalDTO;
