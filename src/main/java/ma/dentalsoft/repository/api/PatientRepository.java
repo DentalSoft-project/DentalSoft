@@ -23,4 +23,14 @@ public interface PatientRepository {
                               LocalDate dateNaissance) throws SQLException;
 
     List<PatientRow> rechercher(Connection cn, String motCle) throws SQLException;
+
+    /**
+     * Recherche paginée.
+     */
+    List<PatientRow> rechercherPaginer(Connection cn, String motCle, int limite, int offset) throws SQLException;
+
+    /**
+     * Compte le nombre total de résultats pour la pagination.
+     */
+    int compter(Connection cn, String motCle) throws SQLException;
 }
