@@ -11,6 +11,7 @@ target/
 .idea/libraries/
 .idea/dataSources.xml
 .idea/vcs.xml
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -39,3 +40,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Local database configuration
+src/main/resources/application.properties
+
+# Local environment variables
+.env
