@@ -31,7 +31,7 @@ public final class JdbcConnectionFactory {
         } catch (SQLException e) {
             throw new IllegalStateException(
                     "Connexion à MySQL impossible (" + url + ") : " + e.getMessage()
-                            + "\nVérifie que MySQL est démarré, que schema.sql a été exécuté "
+                            + "\nVérifie que MySQL est démarré, que le script install.sql a été exécuté "
                             + "et que user/pass sont corrects dans application.properties.", e);
         }
     }

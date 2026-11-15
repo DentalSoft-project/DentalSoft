@@ -1,7 +1,7 @@
 -- ============================================================================
 -- 03_patients_dossiers.sql
--- M2 : patients et dossier médical
--- Dépend de : 01_referentiels.sql (assurance)
+-- M3 : patients, dossier médical et affectation des antécédents
+-- Dépend de : 01_referentiels.sql (assurance, antecedent)
 -- NOTE : cree_par / modifie_par sont des références LOGIQUES vers
 --        utilisateurs.id_utilisateur (aucune FK déclarée volontairement,
 --        la cohérence est assurée côté service applicatif).
@@ -19,21 +19,21 @@ SET NAMES utf8mb4;
 --     le doublon est détecté dans PatientService (index dédié ci-dessous)
 -- ----------------------------------------------------------------------------
 CREATE TABLE patient (
-    id                         BIGINT        NOT NULL AUTO_INCREMENT,
-    nom                        VARCHAR(80)   NOT NULL,
-    prenom                     VARCHAR(80)   NOT NULL,
-    date_naissance             DATE          NOT NULL,
-    sexe                       ENUM('M','F') NOT NULL,
-    cin                        VARCHAR(20)   NULL,
-    telephone                  VARCHAR(20)   NOT NULL,
-    email                      VARCHAR(120)  NULL,
-    adresse                    VARCHAR(255)  NULL,
-    id_assurance               BIGINT        NULL,
-    archive                    BOOLEAN       NOT NULL DEFAULT FALSE,
-    date_creation              DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    date_derniere_modification DATETIME      NULL DEFAULT NULL,
-    cree_par                   BIGINT        NULL,
-    modifie_par                BIGINT        NULL,
+    id                          BIGINT         NOT NULL AUTO_INCREMENT,
+    nom                         VARCHAR(80)    NOT NULL,
+    prenom                      VARCHAR(80)    NOT NULL,
+    date_naissance              DATE           NOT NULL,
+    sexe                        ENUM('M','F')  NOT NULL,
+    cin                         VARCHAR(20)    NULL,
+    telephone                   VARCHAR(20)    NOT NULL,
+    email                       VARCHAR(120)   NULL,
+    adresse                     VARCHAR(255)   NULL,
+    id_assurance                BIGINT         NULL,
+    archive                     BOOLEAN        NOT NULL DEFAULT FALSE,
+    date_creation               DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_derniere_modification  DATETIME       NULL DEFAULT NULL,
+    cree_par                    BIGINT         NULL,
+    modifie_par                 BIGINT         NULL,
     PRIMARY KEY (id),
     CONSTRAINT uk_patient_cin UNIQUE (cin),
     KEY idx_patient_nom_prenom (nom, prenom),
@@ -52,19 +52,44 @@ CREATE TABLE patient (
 -- Dossier médical (1 patient <-> 1 dossier, RG-01)
 --   - patient_id UNIQUE : garantit l'unicité au niveau base
 --   - ON DELETE RESTRICT : un patient avec dossier ne peut pas être supprimé
---   - medecin_id sera ajouté plus tard (M3)
+--   - le médecin responsable est porté par RDV et consultation
 -- ----------------------------------------------------------------------------
 CREATE TABLE dossier_medical (
-    id                         BIGINT   NOT NULL AUTO_INCREMENT,
-    patient_id                 BIGINT   NOT NULL,
-    date_creation              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    date_derniere_modification DATETIME NULL DEFAULT NULL,
-    cree_par                   BIGINT   NULL,
-    modifie_par                BIGINT   NULL,
+    id                          BIGINT         NOT NULL AUTO_INCREMENT,
+    patient_id                  BIGINT         NOT NULL,
+    date_creation               DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_derniere_modification  DATETIME       NULL DEFAULT NULL,
+    cree_par                    BIGINT         NULL,
+    modifie_par                 BIGINT         NULL,
     PRIMARY KEY (id),
     CONSTRAINT uk_dossier_patient UNIQUE (patient_id),
     CONSTRAINT fk_dossier_patient
         FOREIGN KEY (patient_id) REFERENCES patient (id)
+            ON UPDATE CASCADE
+            ON DELETE RESTRICT
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
+
+-- ----------------------------------------------------------------------------
+-- Association Patient / Antécédent selon le diagramme blanc
+-- ----------------------------------------------------------------------------
+CREATE TABLE affectation_antecedent (
+    id                          BIGINT         NOT NULL AUTO_INCREMENT,
+    patient_id                  BIGINT         NOT NULL,
+    antecedent_id               BIGINT         NOT NULL,
+    date_creation               DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_derniere_modification  DATETIME       NULL DEFAULT NULL,
+    cree_par                    BIGINT         NULL,
+    modifie_par                 BIGINT         NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT uk_affectation_patient_antecedent UNIQUE (patient_id, antecedent_id),
+    CONSTRAINT fk_affectation_patient
+        FOREIGN KEY (patient_id) REFERENCES patient (id)
+            ON UPDATE CASCADE
+            ON DELETE RESTRICT,
+    CONSTRAINT fk_affectation_antecedent
+        FOREIGN KEY (antecedent_id) REFERENCES antecedent (id)
             ON UPDATE CASCADE
             ON DELETE RESTRICT
 ) ENGINE = InnoDB
