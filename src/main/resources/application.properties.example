@@ -1,0 +1,16 @@
+# Copier ce fichier en application.properties et renseigner les valeurs locales.
+# --- Connexion MySQL ---
+dataSource.driver=com.mysql.cj.jdbc.Driver
+dataSource.url=jdbc:mysql://localhost:3306/dentalsoftbd?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Casablanca&useSSL=false&allowPublicKeyRetrieval=true
+dataSource.user=CHANGER_ME
+dataSource.pass=CHANGER_ME
+
+# --- ApplicationContext (ordre indifférent ici, l'ordre de création est dans ApplicationContext) ---
+dao.roleRepo=ma.dentalsoft.repository.impl.jdbc_mysql.RoleRepoImpl
+dao.utilisateurRepo=ma.dentalsoft.repository.impl.jdbc_mysql.UtilisateurRepoImpl
+dao.patientRepo=ma.dentalsoft.repository.impl.jdbc_mysql.JdbcPatientRepository
+dao.dossierMedicalRepo=ma.dentalsoft.repository.impl.jdbc_mysql.JdbcDossierMedicalRepository
+service.authService=ma.dentalsoft.service.impl.AuthServiceImpl
+service.patientService=ma.dentalsoft.service.impl.PatientServiceImpl
+dao.assuranceRepo=ma.dentalsoft.repository.impl.jdbc_mysql.JdbcAssuranceRepository
+service.assuranceService=ma.dentalsoft.service.impl.AssuranceServiceImpl
