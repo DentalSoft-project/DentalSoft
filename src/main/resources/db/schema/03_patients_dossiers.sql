@@ -57,6 +57,7 @@ CREATE TABLE patient (
 CREATE TABLE dossier_medical (
     id                          BIGINT         NOT NULL AUTO_INCREMENT,
     patient_id                  BIGINT         NOT NULL,
+    observations_cliniques      TEXT           NULL,
     date_creation               DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_derniere_modification  DATETIME       NULL DEFAULT NULL,
     cree_par                    BIGINT         NULL,
